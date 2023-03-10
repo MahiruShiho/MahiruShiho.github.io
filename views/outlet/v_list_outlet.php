@@ -4,9 +4,7 @@
     include_once '../template/topbar.php';
     include_once '../../controllers/c_outlet.php';
 
-    $c_outlet = new c_outlet();
-
-    ?>
+    $c_outlet = new c_outlet(); ?>
     <!-- content a@s -->
                 <div class="nk-content ">
                     <div class="container-fluid">
@@ -62,6 +60,7 @@
                                         </div><!-- .nk-block-head-content -->
                                     </div><!-- .nk-block-baetween -->
                                 </div><!-- .nk-block-head -->
+                                <?php if (!$c_outlet->tampil_data() == NULL) {?>
                                 <div class="nk-block">
                                     <div class="nk-tb-list is-separate is-medium mb-3">
                                         <div class="nk-tb-item nk-tb-head">
@@ -76,7 +75,7 @@
                                             <div class="nk-tb-col nk-tb-col-tools">
                                             </div>
                                         </div><!-- .nk-tb-item -->
-                                        <?php
+                                        <?php }
 // manampilkan data dari method atau function tampil_data() 
 if (!$c_outlet->tampil_data()) {
     echo '
@@ -119,13 +118,14 @@ foreach ($c_outlet->tampil_data() as $data) {
                                                 <ul class="nk-tb-actions gx-1">
                                                     <li class="nk-tb-action-hidden"><a href="v_edit_outlet.php?id=<?php echo $data->id ?>" class="btn btn-icon btn-trigger btn-tooltip" title="Edit">
                                                             <em class="icon ni ni-pen2"></em></a></li>
-                                                    <li class="nk-tb-action-hidden"><a onclick="return confirm('Apakah yakin data akan di hapus?')" href="../../routers/r_outlet.php?id=<?php echo $data->id ?>&aksi=hapus" class="btn btn-icon btn-trigger btn-tooltip" title="Delete">
+                                                    <li class="nk-tb-action-hidden"><a href="../../routers/r_outlet.php?id=<?php echo $data->id ?>&aksi=hapus" class="btn btn-delete btn-icon btn-trigger btn-tooltip" title="Delete">
                                                             <em class="icon ni ni-cross"></em></a></li>
                                                 </ul>
                                             </div>
                                         </div><!-- .nk-tb-item -->
                                         <?php }} ?>
                                     </div><!-- .nk-tb-list -->
+                                    <?php if (!$c_outlet->tampil_data() == NULL) {?>
                                     <div class="card">
                                         <div class="card-inner">
                                             <div class="nk-block-between-md g-3">
@@ -157,6 +157,7 @@ foreach ($c_outlet->tampil_data() as $data) {
            echo "<li class='page-item'><a class='page-link' href=\"v_list_outlet.php?page=".($page+1)."\"><em class='icon ni ni-chevrons-right'></em></a></li>";
         }
     }
+}
     ?>
                                                     </ul><!-- .pagination -->
                                                 </div>
@@ -208,6 +209,70 @@ foreach ($c_outlet->tampil_data() as $data) {
     <!-- app-root @e -->
     <!-- select region modal -->
     <!-- JavaScript -->
+    <?php 
+    if ($_GET['aksi'] == 'update') {
+echo "
+<script>
+Swal.fire(
+    'Sukses!',
+    'Data Berhasil diubah!',
+    'success'
+)
+</script>
+";
+} elseif ($_GET['aksi'] == 'hapus') {
+    echo "
+    <script>
+    Swal.fire(
+        'Terhapus',
+        'Data Berhasil di hapus',
+        'success'
+      )
+    </script>
+    ";
+} elseif ($_GET['aksi'] == 'tambah') {
+    echo "
+    <script>
+    Swal.fire(
+        'Sukses!',
+        'Data Berhasil ditambahkan!',
+        'success'
+    )
+    </script>
+    ";
+}?>
+<script>
+// mendapatkan semua elemen yang memiliki class "btn-delete"
+const deleteButtons = document.querySelectorAll('.btn-delete');
+
+// mengiterasi semua tombol hapus
+deleteButtons.forEach(button => {
+  // menambahkan event listener untuk event click
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    // mengambil nilai href dari elemen
+    const href = this.getAttribute('href');
+
+
+  Swal.fire({
+  title: 'Apa kamu yakin',
+  text: "untuk menghapus data ini?",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Ya, Hapus!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = href;
+  } else {
+    return false;
+  }
+});
+  });
+});
+</script>
     <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
     <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>

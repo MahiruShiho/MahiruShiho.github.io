@@ -7,12 +7,6 @@
     $c_outlet = new c_outlet();
     ?>
 
-<?php 
-    include_once '../template/header.php';
-    include_once '../template/sidebar.php';
-    include_once '../template/topbar.php';
-    ?>
-
     <div class="row" style="background-color: white;">
         <div class="col">
         </div>
@@ -25,12 +19,12 @@
                         class="form-control" name="id" value="<?php echo $data->id ?>" hidden>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"></label> <input type="text"
-                        class="form-control" name="nama" value="<?php echo $data->nama ?>">
+                    <label for="exampleInputEmail1" class="form-label">Nama</label> <input type="text"
+                        class="form-control" name="nama" value="<?php echo $data->nama ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Alamat</label> <input type="text"
-                        class="form-control" name="alamat" value="<?php echo $data->alamat ?>">
+                        class="form-control" name="alamat" value="<?php echo $data->alamat ?>" required>
                 </div>
                 <!-- <div class="mb-3">
                     <select name="jenis_kelamin" id="jeniskelamin" class="form-select">
@@ -40,10 +34,10 @@
                     </select>
                 </div> -->
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Telepon</label> <input type="text"
-                        class="form-control" name="tlp" value="<?php echo $data->tlp ?>">
+                    <label for="exampleInputPassword1" class="form-label">Telepon</label> <input type="number"
+                        class="form-control" name="tlp" value="<?php echo $data->tlp ?>" required>
                 </div>
-                <button style="" type="submit" class="btn btn-primary">Kirim</button>
+                <button style="" name="update" type="submit" class="btn btn-primary">Kirim</button>
                 <?php } ?>
             </form>
         </div>
@@ -51,12 +45,27 @@
         </div>
     </div>
 </body>
-<script src="../../assets/js/bootstrap.bundle.min.js"
+<!-- <script src="../../assets/js/bootstrap.bundle.min.js"
     integrity="sha384-u10knCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTP00mMi466C8"
-    crossorigin="anonymous"></script>
-    <script src="../assets/js/bundle.js?ver=3.1.2"></script>
-    <script src="../assets/js/scripts.js?ver=3.1.2"></script>
+    crossorigin="anonymous"></script> -->
+    <?php 
+    if ($_GET['aksi'] == 'error') {
+        echo "
+        <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data Gagal diubah',
+            confirmButtonText: 'Coba lagi!'
+          })
+        </script>
+        ";
+    }
+    ?>
+    <script src="../../assets/js/mainn.js"></script>
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
 </html>

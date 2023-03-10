@@ -76,21 +76,30 @@ class c_transaksi{
         public function insert_data2($id, $outlet, $invoice, $member, $tgl, $batass, $status, $dibayar, $user, $produk, $qty, $keterangan){
 
             $conn = $this->koneksi();
+
+            // if ($member === "" or $produk === "" or empty($batass) or empty($qty) or empty($keterangan)) {
+            //     echo '<script>';
+            //     echo 'alert("Data Gagal ditambahkan-");';
+            //     echo 'document.location.href="../views/transaksi/v_tambah_transaksi.php"';
+            //     echo '</script>';
+            // } else {
     
             $query = "INSERT INTO `tb_transaksi` (`id`, `id_outlet`, `kode_invoice`, `id_member`, `tgl`, `batas_waktu`, `tanggal_bayar`, `biaya_tambahan`, `diskon`, `pajak`, `status`, `dibayar`, `id_user`, `id_paket`, `qty`, `keterangan`) VALUES ('$id', '$outlet', '$invoice', '$member', '$tgl', '$batass', '', '', '', '', '$status', '$dibayar', '$user', '$produk', '$qty', '$keterangan');";
             
             $insert = mysqli_query($conn, $query);
     
             if ($insert){
-                echo '<script>';
-                echo 'alert("Data Berhasil ditambahkan");';
-                echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-                echo '</script>';
+                header("location:../views/transaksi/v_transaksi.php?aksi=sukses");
+                // echo '<script>';
+                // echo 'alert("Data Berhasil ditambahkan");';
+                // echo 'document.location.href="../views/transaksi/v_transaksi.php"';
+                // echo '</script>';
             }else{
-                echo '<script>';
-                echo 'alert("Data Gagal ditambahkan");';
-                echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-                echo '</script>';
+                header("location:../views/transaksi/v_tambah_transaksi.php?aksi=error");
+                // echo '<script>';
+                // echo 'alert("Data Gagal ditambahkan");';
+                // echo 'document.location.href="../views/transaksi/v_tambah_transaksi.php"';
+                // echo '</script>';
                 }
             
         }
@@ -100,10 +109,11 @@ class c_transaksi{
         $conn = $this->koneksi();
         $query = "DELETE FROM tb_transaksi WHERE id = $id";
         mysqli_query($conn,$query);
-        echo '<script>';
-        echo 'alert("Data Berhasil dihapus");';
-        echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-        echo '</script>';
+        header("location:../views/transaksi/v_transaksi.php?aksi=hapus");
+        // echo '<script>';
+        // echo 'alert("Data Berhasil dihapus");';
+        // echo 'document.location.href="../views/transaksi/v_transaksi.php"';
+        // echo '</script>';
     }
 
     public function edit($id) {
@@ -127,15 +137,17 @@ class c_transaksi{
         $update = mysqli_query($conn, $query);
 
         if ($update) {
-            echo '<script>';
-            echo 'alert("Data Berhasil diubah");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_transaksi.php?aksi=update");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil diubah");';
+            // echo 'document.location.href="../views/transaksi/v_transaksi.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data gagal diubah");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_detail_transaksi.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Data gagal diubah");';
+            // echo 'document.location.href="../views/transaksi/v_detail_transaksi.php"';
+            // echo '</script>';
         }
     }
 
@@ -147,15 +159,43 @@ class c_transaksi{
         $update = mysqli_query($conn, $query);
         
         if ($update) {
-            echo '<script>';
-            echo 'alert("Transaksi Berhasil");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_transaksi.php?aksi=dibayar");
+            // echo '<script>';
+            // echo 'alert("Transaksi Berhasil");';
+            // echo 'document.location.href="../views/transaksi/v_transaksi.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Transaksi Gagal");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_konfirmasi_pembayaran.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Transaksi Gagal");';
+            // echo 'document.location.href="../views/transaksi/v_transaksi.php"';
+            // echo '</script>';
         }
     }
+
+    public function invoice() {
+     
+        $conn = $this->koneksi();
+        
+    $query = mysqli_query($conn, "SELECT max(kode_invoice) as bebep FROM tb_transaksi");
+    $data = mysqli_fetch_array($query);
+    $kodeinvoicee = $data['bebep'];
+     
+    // mengambil angka dari kode barang terbesar, menggunakan fungsi substr
+    // dan diubah ke integer dengan (int)
+    $urutan = (int) substr($kodeinvoicee, 3, 3);
+     
+    // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+    $urutan++;
+     
+    // membentuk kode barang baru
+    // perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
+    // misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
+    // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
+    $huruf = "TR";
+    $kodeinvoicee = $huruf . sprintf("%03s", $urutan);
+    echo $kodeinvoicee;
+    }
 }
+
+?>

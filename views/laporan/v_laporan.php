@@ -28,12 +28,27 @@
         </div>
     </div>
 </body>
-<script src="../../assets/js/bootstrap.bundle.min.js"
+<!-- <script src="../../assets/js/bootstrap.bundle.min.js"
     integrity="sha384-u10knCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTP00mMi466C8"
-    crossorigin="anonymous"></script>
-    <script src="../assets/js/bundle.js?ver=3.1.2"></script>
-    <script src="../assets/js/scripts.js?ver=3.1.2"></script>
+    crossorigin="anonymous"></script> -->
+    <?php 
+        if ($_GET['aksi'] == 'error') {
+            echo "
+            <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilih Metode Terlebih dahulu',
+                confirmButtonText: 'Coba lagi!'
+              })
+            </script>
+            ";
+        }
+        ?>
+    <script src="../../assets/js/mainn.js"></script>
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
 </html>

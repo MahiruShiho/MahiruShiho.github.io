@@ -39,37 +39,45 @@ class c_produk{
             
     }
 
-    public function cetak(){
-         $conn = $this->koneksi();
+    public function getproduk() {
+        $conn = $this->koneksi();
+         $outlett = "SELECT * FROM tb_paket";
 
-            $query = "SELECT * FROM tb_paket";
-
-            $data = mysqli_query($conn, $query);
+        $data = mysqli_query($conn, $outlett);
             while($d = mysqli_fetch_object($data)){
                 $hasil[] = $d;
             }
             return $hasil;
-        }
+    }   
     
 
     public function insert_data($id, $outlet, $jenispak, $namaket, $harga){
 
         $conn = $this->koneksi();
 
+        // if ($jenispak === "" or empty($namaket) or empty($harga)) {
+        //     echo '<script>';
+        //     echo 'alert("Data Gagal ditambahkan-");';
+        //     echo 'document.location.href="../views/produk/v_tambah_produk.php"';
+        //     echo '</script>';
+        // } else {
+
         $query = "INSERT INTO tb_paket VALUES ('$id', '$outlet', '$jenispak', '$namaket', '$harga')";
         
         $insert = mysqli_query($conn, $query);
 
         if ($insert){
-            echo '<script>';
-            echo 'alert("Data Berhasil ditambahkan");';
-            echo 'document.location.href="../views/produk/v_list_product.php"';
-            echo '</script>';
+            header("location:../views/produk/v_list_product.php?aksi=sukses");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil ditambahkan");';
+            // echo 'document.location.href="../views/produk/v_list_product.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data Gagal ditambahkan");';
-            echo 'document.location.href="../views/produk/v_list_product.php"';
-            echo '</script>';
+            header("location:../views/produk/v_tambah_produk.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Data Gagal ditambahkan");';
+            // echo 'document.location.href="../views/produk/v_tambah_produk.php"';
+            // echo '</script>';
             }
         
     }
@@ -78,10 +86,11 @@ class c_produk{
         $conn = $this->koneksi();
         $query = "DELETE FROM tb_paket WHERE id = $id";
         mysqli_query($conn,$query);
-        echo '<script>';
-        echo 'alert("Data Berhasil dihapus");';
-        echo 'document.location.href="../views/produk/v_list_product.php"';
-        echo '</script>';
+        header("location:../views/produk/v_list_product.php?aksi=hapus");
+        // echo '<script>';
+        // echo 'alert("Data Berhasil dihapus");';
+        // echo 'document.location.href="../views/produk/v_list_product.php"';
+        // echo '</script>';
     }
 
     public function edit($id) {
@@ -99,20 +108,24 @@ class c_produk{
     public function update($id, $outlet, $jenispak, $namaket, $harga) {
 
         $conn = $this->koneksi();
+        // if ($jenispak === "" or empty($namaket) or empty($harga)) {
+        //     echo '<script>';
+        //     echo 'alert("Data Gagal diubah-");';
+        //     echo 'document.location.href="../views/produk/v_edit_produk.php"';
+        //     echo '</script>';
+        // } else {
 
         $query = "UPDATE tb_paket SET id_outlet='$outlet', jenis='$jenispak', nama_paket='$namaket', harga='$harga' WHERE id='$id'";
         $update = mysqli_query($conn, $query);
 
         if ($update) {
-            echo '<script>';
-            echo 'alert("Data Berhasil diubah");';
-            echo 'document.location.href="../views/produk/v_list_product.php"';
-            echo '</script>';
+            header("location:../views/produk/v_list_product.php?aksi=update");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil diubah");';
+            // echo 'document.location.href="../views/produk/v_list_product.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data gagal diubah");';
-            echo 'document.location.href="../views/produk/v_list_product.php"';
-            echo '</script>';
+            header("location:../views/produk/v_edit_produk.php?aksi=error");
         }
     }
 }

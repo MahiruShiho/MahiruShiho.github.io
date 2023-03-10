@@ -27,19 +27,36 @@
           <h1 data-aos="fade-up">Selamat Datang <?php echo $_SESSION['nama'] ?></h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Ini adalah home <?php echo $_SESSION['role'] ?></h2>
           <div data-aos="fade-up" data-aos-delay="600">
-              <a href="#"  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Started</span> 
+            <?php if ($_SESSION['role'] == 'admin') {?>
+              <a href="../produk/v_list_product.php"  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Produk</span> 
                 <i class="bi bi-arrow-right"></i>
               </a>
-              <a href="#" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Demo</span> 
+              <a href="../laporan/v_laporan.php" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Laporan</span> 
                 <i class="bi bi-arrow-right"></i>
               </a>
+              <?php } elseif($_SESSION['role'] == 'kasir') {?>
+                <a href="../transaksi/v_transaksi.php"  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Transaksi</span> 
+                <i class="bi bi-arrow-right"></i>
+              </a>
+              <a href="../laporan/v_laporan.php" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Laporan</span> 
+                <i class="bi bi-arrow-right"></i>
+              </a>
+                <?php } elseif($_SESSION['role'] == 'owner') {?>
+                  <a href="../laporan/v_laporan.php" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Laporan</span> 
+                <i class="bi bi-arrow-right"></i>
+              </a>
+                  <?php }?>
+
           </div>
           </center>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="../../assets/img/hero-img.png" class="img-fluid" alt="">
+          <img src="../../assets/img/laundry.png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -63,10 +80,10 @@
 <link href="../../assets/img/favicon.png" rel="icon">
   <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <!-- <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="../../assets/css/sstyle.css" rel="stylesheet">
+  <link href="../../assets/css/sstyle.css" rel="stylesheet"> -->
 </html>

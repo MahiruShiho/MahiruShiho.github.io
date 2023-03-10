@@ -111,10 +111,7 @@ foreach ($transaksi->tampil_data() as $data) {
                             </td>
                         </tr>
                         <?php }} else {
-                            echo '<script>';
-                            echo 'alert("Pilih Metode Laporan dulu");';
-                            echo 'document.location.href="v_laporan.php"';
-                            echo '</script>';
+                            header("location:v_laporan.php?aksi=error");
                         }}?>
                     </tbody>
                 </table>
@@ -123,6 +120,10 @@ foreach ($transaksi->tampil_data() as $data) {
         </div>
     </div>
     <script>window.print();</script>
+    <!-- <script>window.history.back()</script> -->
+    <!-- <php if (isset($_POST['transaksi'])) {?>
+    <script>document.location.href="v_laporan.php";</script>
+    <php }?> -->
 </body>
 
 </html>

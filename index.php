@@ -1,194 +1,428 @@
 <?php 
-session_start();
-error_reporting(E_ALL ^ E_NOTICE);
-include_once 'controllers/c_login.php';
-
-if ($_SESSION['role'] == "admin") {
-  header("location:views/pengguna/home.php");
-} else if ($_SESSION['role'] == "kasir" ){
-  header("location:views/pengguna/home.php");
-} else if ($_SESSION['role'] == "owner" ){
-header("location:views/pengguna/home.php");
-} else {
-  echo '';
-}
+include_once 'controllers/c_produk.php';
+$produk = new c_produk();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <style>
-        body {
-  margin: 0;
-  padding: 0;
-  background-size: cover;
-  font-family: sans-serif;
-}
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-.box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 25rem;
-  padding: 2.5rem;
-  box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 0.625rem;
-}
+  <title>Seven Laundry</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-.box h2 {
-  margin: 0 0 1.875rem;
-  padding: 0;
-  color: #fff;
-  text-align: center;
-}
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="assets/images/favicon.ico">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-.box .inputBox {
-  position: relative;
-}
+  <!-- Google Fonts -->
+  <link href="asssets/fonts/googlefont.css" rel="stylesheet">
 
-.box .inputBox input {
-  width: 100%;
-  padding: 0.625rem 0;
-  font-size: 1rem;
-  color: #fff;
-  letter-spacing: 0.062rem;
-  margin-bottom: 1.875rem;
-  border: none;
-  border-bottom: 0.065rem solid #fff;
-  outline: none;
-  background: transparent;
-}
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-video{
-	position: absolute;
-	top:0;
-	left:0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	object-fit: cover;
-	z-index: -2;
-}
+  <!-- Template Main CSS File -->
+  <link href="assets/css/stylei.css" rel="stylesheet">
 
-.box .inputBox label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.625rem 0;
-  font-size: 1rem;
-  color: #fff;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-.box .inputBox input:focus ~ label,
-.box .inputBox input:valid ~ label,
-.box .inputBox input:not([value=""]) ~ label {
-  top: -1.125rem;
-  left: 0;
-  color: #03a9f4;
-  font-size: 0.75rem;
-}
-
-.box input[type="submit"] {
-  border: none;
-  outline: none;
-  color: #fff;
-  background-color: #03a9f4;
-  padding: 0.625rem 1.25rem;
-  cursor: pointer;
-  border-radius: 0.312rem;
-  font-size: 1rem;
-}
-
-.box input[type="submit"]:hover {
-  background-color: #1cb1f5;
-}
-
-.tol input[type="submit"] {
-  border: none;
-  outline: none;
-  color: #fff;
-  background-color: #03a9f4;
-  padding: 0.625rem 1.25rem;
-  cursor: pointer;
-  border-radius: 0.312rem;
-  font-size: 1rem;
-}
-
-.tol input[type="submit"]:hover {
-  background-color: #1cb1f5;
-}
-
-#broken{
- transform:scale(0.75) translatex(-55px) translatey(-23px);
-}
-
-
-body::after {
-	content: "";
-	width: 100%;
-	height: 100vh;
-	background: black;
-	opacity: 0.7;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-}
-
-    </style>
+  <!-- =======================================================
+  * Template Name: Ninestars - v4.10.0
+  * Template URL: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
+
 <body>
-<div class="box">
-    <center>
-    <img class="mb-4" src="assets/images/kawaii.png" width= "100px" height="100px" style="margin-bottom: 20px;">
-    </center>
-    <img id="broken" src="assets/images/broken.png" alt="">
-  <!-- <h2>Broken Laundry</h2> -->
-  <form action="" method="post">
-    <div class="inputBox">
-      <input type="text" name="username">
-      <label>Username</label>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <!-- <h1 class="text-light"><a href="index.html"><span>Seven Laundry</span></a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="#"><img src="assets/images/seven.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
+          <li><a class="nav-link scrollto" href="#services">Produk</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li> -->
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li> -->
+          <!-- <li><a class="nav-link scrollto" href="#contact">Hubungi Kami</a></li> -->
+          <li><a class="getstarted scrollto" href="login.php">Login</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-    <div class="inputBox">
-      <input type="password" name="password">
-      <label>Password</label>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center" style=" min-height:580px;">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1>Apa Sih Solusi Untuk Pakaian Kotor?</h1>
+          <h2>Seven Laundry lah Jawabannya :)</h2>
+          <div>
+            <a href="#about" class="btn-get-started scrollto">Tentang Kami</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="assets/img/laundry.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
     </div>
-    <center>
-    <input style="" type="submit" name="login" value="Login">
-    </center>
-  </form>
-  <br>
-  <center>
-  <input onclick="toggleMute();" type="submit" value="♫">
-  </center>
-</div>
-<div class="tol">
 
-</div>
-<video id="myVideo" autoplay control muted loop>
-<source src="assets/video/Dejavu.mp4" type="video/mp4">
- </video>
+  </section><!-- End Hero -->
 
- <script>
-function toggleMute() {
+  <main id="main">
 
-var video=document.getElementById("myVideo")
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about" style=" padding-bottom:100px;">
+      <div class="container">
 
-if(video.muted){
-	video.muted = false;
-} else {
-	video.muted = true;
-}
+        <div class="row justify-content-between">
+          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
+            <img src="assets/img/pngegg.png" class="img-fluid" alt="" data-aos="zoom-in" style=" height:358px;">
+          </div>
+          <div class="col-lg-6 pt-5 pt-lg-0">
+            <h3 data-aos="fade-up">Tentang Kami</h3>
+            <p data-aos="fade-up" data-aos-delay="100">
+              SevenLaundry merupakan salah satu pelayanan jasa di bidang cuci mencuci pakaian dengan memiliki jenis cucian yang telah ditetapkan harga oleh pihak Seven Laundry
+            </p>
+            <div class="row">
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <i class="bx bx-receipt"></i>
+                <h4>Tanpa Biaya Tambahan</h4>
+                <p>Kami Menyediakan Layanan Terbaik yang kami tetapkan tanpa biaya tambahan</p>
+              </div>
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <i class="bx bx-tachometer"></i>
+                <h4>Cepat dan Hemat</h4>
+                <p>Kami Menyediakan Layanan Mencuci yang Murah dan Hemat tanpa adanya Permintaan yang kami tunda</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-}
- </script>
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Produk / Paket</h2>
+          <p>Ini adalah Produk / Paket Yang Tersedia!</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-message-square-check"></i></div>
+              <h4 class="title"><a href="">Selimut</a></h4>
+              <p class="description">Kami Menyediakan Layanan Untuk mencuci Selimut dengan murah dan Efisien dengan harga Hanya Rp.10.000 Saja</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-message-square-check"></i></div>
+              <h4 class="title"><a href="">Bed Cover</a></h4>
+              <p class="description">Kami Menyediakan Layanan Untuk mencuci Bed Cover dengan murah dan Efisien dengan harga Hanya Rp.30.000 Saja</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-message-square-check"></i></div>
+              <h4 class="title"><a href="">Kaos</a></h4>
+              <p class="description">Kami Menyediakan Layanan Untuk mencuci Kaos atau Pakaian dengan murah dan Efisien dengan harga Hanya Rp.7.000 Saja</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-like"></i></div>
+              <h4 class="title"><a href="">Lainnya</a></h4>
+              <p class="description">Kami Juga Menyediakan Layanan Seperti Mencuci boneka dan lainnya dengan murah dan Efisien dengan harga yang kami tetapkan</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= F.A.Q Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>F.A.Q</h2>
+          <p>Pertanyaan Dan Jawaban</p>
+        </div>
+
+        <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+          <li>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Apakah Paket Nantinya Akan Memiliki Promo atau Diskon? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Akan kami usahakan Untuk menyediakan Layanan Tersebut Tersedia Untuk Anda
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Bagaimana Cara Untuk Mendaftarkan Pesanan Cucian?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Anda bisa <a href="#contact" class="btn-get-started scrollto">Menghubungi Kami</a> dibawah untuk Mengirim Pesanan Cucian Kepada kami yang akan kami proses secara cepat!
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Apakah akan dikenakan biaya tambahan apabila tidak membayar pada waktu yang ditentukan? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Layanan kami Menyediakan Sistem Pending. jadi anda bisa membayar kapanpun tanpa dikenakan biaya tambahan
+              </p>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+    </section><!-- End F.A.Q Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <!-- <h2>Team</h2> -->
+          <p>Seven-Team</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="member">
+              <img src="assets/img/team/sur.jpeg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Muhamad Suryanto</h4>
+                  <span>Designer Web And System PHP </span>
+                </div>
+                <div class="social">
+                  <!-- <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="member">
+              <img src="assets/img/team/ragil.png" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Ragil</h4>
+                  <span>ERD And Documentation Report</span>
+                </div>
+                <div class="social">
+                  <!-- <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="member">
+              <img src="assets/img/team/ardiass.jpeg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Ardias</h4>
+                  <span>Menu Structure And Prototype Desainer</span>
+                </div>
+                <div class="social">
+                  <!-- <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="member">
+              <img src="assets/img/team/dikaa.jpeg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Dika</h4>
+                  <span>Data Flow Diagram And Activity Diagram</span>
+                </div>
+                <div class="social">
+                  <!-- <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+    <!-- ======= Contact Us Section ======= -->
+    <!-- <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Hubungi Kami</h2>
+          <p>Untuk Pendaftaran Pesanan Laundry</p>
+        </div>
+
+        <div class="row">
+          <div class="col-1">
+            </div>
+          <div class="col-lg-10 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <form action="routers/r_inbox.php?aksi=tambah" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="form-group col-md-6">
+                <input type="text" name="id" class="form-control" id="name" hidden>
+                  <label for="name">Nama Lengkap</label>
+                  <input type="text" name="nama" class="form-control" id="name" placeholder="Disarankan Nama Asli" required>
+                </div>
+                <div class="form-group col-md-6 mt-3 mt-md-0">
+                  <label for="name">No.Telepon</label>
+                  <input type="number" class="form-control" name="tlp" id="email" placeholder="+62 / 08" required>
+                </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-md-6">
+              <label for="exampleInputEmail1" class="form-label">Paket Layanan</label>
+                  <select name="jenispak" id="" class="form-select" required>
+                      <option value="">Pilihan Paket</option>
+                      <php foreach ($produk->getproduk() as $prod) {?>
+                      <option value="<php echo $prod->jenis ?>"><php echo $prod->nama_paket ?></option>
+                      <php }?>
+                      </select>
+              </div>
+              <div class="form-group col-md-6 mt-3 mt-md-0">
+                  <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
+                  <select name="jeniskel" id="" class="form-select" required>
+                      <option value="">Pilihan Gender</option>
+                      <option value="L">Laki-Laki</option>
+                      <option value="P">Perempuan</option>
+                      </select>
+              </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="name">Alamat</label>
+                <input type="text" name="alamat" class="form-control" id="subject" placeholder="Alamat Lengkap, RT/RW, POS" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="name">Catatan</label>
+                <textarea class="form-control" name="catatan" rows="10" placeholder="Disarankan untuk Catatan yang berkaitan dengan Pesanan seperti tanggal pengambilan atau Peringatan Akan Kerusakan Pakaian dan lain sebagainya"></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message" style="background-color:lightgreen;color:lightgreen;"></div>
+                <div class="sent-message">Pesan Anda Sedang Diproses, Terima Kasih</div>
+              </div>
+              <div class="text-center">
+                <button name="tambah" type="submit">Kirim</button>
+                <input type="text" name="tambah" value="" hidden>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section> -->
+    <!-- End Contact Us Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>SevenLaundry</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/ -->
+        <!-- Khusus Karyawan <a href="login.php">Login</a> -->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/maini.js"></script>
+
 </body>
+</style>
 </html>

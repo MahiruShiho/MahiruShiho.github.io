@@ -7,10 +7,10 @@ $data = new c_transaksi();
 // $produk = new c_pelanggan();
 
 $id = $_POST['id'];
-$produk = $_POST['hargaproduk'];
-$qty = $_POST['qty'];
-$hargaa = $_POST['hargaa'];
 $tglbayar = $_POST['tglbayar'];
+// $produk = $_POST['hargaproduk'];
+// $qty = $_POST['qty'];
+// $hargaa = $_POST['hargaa'];
 // $prod = $hargaa;
 
 if ($_GET['aksi'] == 'updat') {

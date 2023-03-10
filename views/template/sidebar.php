@@ -3,8 +3,8 @@
                     <div class="nk-sidebar-brand">
                         <a href="html/index.html" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="../../assets/images/logo.png" srcset="../../assets/images/logo2x.png 2x" alt="logo">
-                            <img class="logo-dark logo-img" src="../../assets/images/broken.png" srcset="../../assets/images/broken.png 2x" alt="logo-dark" style="transform:scale(1.65) translatex(20px) translatey(-7px);">
-                            <img class="logo-small logo-img logo-img-small" src="../../assets/images/broken2.png" srcset="../../assets/images/broken2.png 2x" alt="logo-small">
+                            <img class="logo-dark logo-img" src="../../assets/images/seven.png" srcset="../../assets/images/seven.png 2x" alt="logo-dark" style="transform:scale(1.65) translatex(20px) translatey(-7px);">
+                            <img class="logo-small logo-img logo-img-small" src="../../assets/images/S.png" srcset="../../assets/images/S.png 2x" alt="logo-small">
                         </a>
                     </div>
                     <div class="nk-menu-trigger me-n2">

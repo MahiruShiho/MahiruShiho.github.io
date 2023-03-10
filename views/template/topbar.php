@@ -1,3 +1,9 @@
+<?php 
+include_once '../../controllers/c_box.php';
+
+$box = new c_box();
+?>
+
 <div class="nk-header nk-header-fixed is-light">
                     <div class="container-fluid">
                         <div class="nk-header-wrap">
@@ -6,8 +12,8 @@
                             </div>
                             <div class="nk-header-brand d-xl-none">
                                 <a href="html/index.html" class="logo-link">
-                                    <img class="logo-light logo-img" src="../../assets/images/logo.png" srcset="../../assets/images/logo2x.png 2x" alt="logo">
-                                    <img class="logo-dark logo-img" src="../../assets/images/logo-dark.png" srcset="../../assets/images/logo-dark2x.png 2x" alt="logo-dark">
+                                    <img class="logo-light logo-img" src="../../assets/images/seven.png" srcset="../../assets/images/seven.png 2x" alt="logo">
+                                    <img class="logo-dark logo-img" src="../../assets/images/seven.png" srcset="../../assets/images/seven.png 2x" alt="logo-dark">
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-search ms-3 ms-xl-0">
@@ -20,7 +26,7 @@
                                         <a href="#" class="dropdown-toggle me-n1 show" data-bs-toggle="dropdown" aria-expanded="true">
                                             <div class="user-toggle">
                                                 <div class="user-avatar sm">
-                                                    <em class="icon ni ni-user-alt"></em>
+                                                    <img src="../../assets/images/kawaii.png" alt="">
                                                 </div>
                                                 <div class="user-info d-none d-xl-block">
                                                     <div class="user-status user-status-active"><?php echo $_SESSION['role'] ?></div>
@@ -32,7 +38,7 @@
                                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                 <div class="user-card">
                                                     <div class="user-avatar">
-                                                        <span>AB</span>
+                                                    <img src="../../assets/images/kawaii.png" alt="">
                                                     </div>
                                                     <div class="user-info">
                                                         <span class="lead-text"><?php echo $_SESSION['nama'] ?></span>

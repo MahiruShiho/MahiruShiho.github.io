@@ -38,38 +38,35 @@ class c_outlet{
             $test['yaho'] = $hai;
             
     }
-
-    public function cetak(){
-         $conn = $this->koneksi();
-
-            $query = "SELECT * FROM tb_outlet";
-
-            $data = mysqli_query($conn, $query);
-            while($d = mysqli_fetch_object($data)){
-                $hasil[] = $d;
-            }
-            return $hasil;
-        }
     
 
     public function insert_data($id, $nama, $alamat, $tlp){
 
         $conn = $this->koneksi();
 
+        // if (empty($nama) or empty($alamat) or empty($tlp)){
+        //     echo '<script>';
+        //     echo 'alert("Data Gagal ditambahkan-");';
+        //     echo 'document.location.href="../views/outlet/v_tambah_outlet.php"';
+        //     echo '</script>';
+        // } else {
+
         $query = "INSERT INTO tb_outlet VALUES ('$id', '$nama', '$alamat', '$tlp')";
         
         $insert = mysqli_query($conn, $query);
 
         if ($insert){
-            echo '<script>';
-            echo 'alert("Data Berhasil ditambahkan");';
-            echo 'document.location.href="../views/outlet/v_list_outlet.php"';
-            echo '</script>';
+            header("location:../views/outlet/v_list_outlet.php?aksi=tambah");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil ditambahkan");';
+            // echo 'document.location.href="../views/outlet/v_list_outlet.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data Gagal ditambahkan");';
-            echo 'document.location.href="../views/outlet/v_list_outlet.php"';
-            echo '</script>';
+            header("location:../views/outlet/v_tambah_outlet.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Data Gagal ditambahkan");';
+            // echo 'document.location.href="../views/outlet/v_tambah_outlet.php"';
+            // echo '</script>';
             }
         
     }
@@ -78,10 +75,11 @@ class c_outlet{
         $conn = $this->koneksi();
         $query = "DELETE FROM tb_outlet WHERE id = $id";
         mysqli_query($conn,$query);
-        echo '<script>';
-        echo 'alert("Data Berhasil dihapus");';
-        echo 'document.location.href="../views/outlet/v_list_outlet.php"';
-        echo '</script>';
+        header("location:../views/outlet/v_list_outlet.php?aksi=hapus");
+        // echo '<script>';
+        // echo 'alert("Data Berhasil dihapus");';
+        // echo 'document.location.href="../views/outlet/v_list_outlet.php"';
+        // echo '</script>';
     }
 
     public function edit($id) {
@@ -111,19 +109,28 @@ class c_outlet{
 
         $conn = $this->koneksi();
 
+        // if (empty($nama) or empty($alamat) or empty($tlp)){
+        //     echo '<script>';
+        //     echo 'alert("Data Gagal diubah-");';
+        //     echo 'document.location.href="../views/outlet/v_edit_outlet.php"';
+        //     echo '</script>';
+        // } else {
+
         $query = "UPDATE tb_outlet SET nama='$nama', alamat='$alamat', tlp='$tlp' WHERE id='$id'";
         $update = mysqli_query($conn, $query);
 
         if ($update) {
-            echo '<script>';
-            echo 'alert("Data Berhasil diubah");';
-            echo 'document.location.href="../views/outlet/v_list_outlet.php"';
-            echo '</script>';
+            header("location:../views/outlet/v_list_outlet.php?aksi=update");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil diubah");';
+            // echo 'document.location.href="../views/outlet/v_list_outlet.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data gagal diubah");';
-            echo 'document.location.href="../views/outlet/v_list_outlet.php"';
-            echo '</script>';
+            header("location:../views/outlet/v_edit_outlet.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Data gagal diubah");';
+            // echo 'document.location.href="../views/outlet/v_edit_outlet.php"';
+            // echo '</script>';
         }
     }
 }

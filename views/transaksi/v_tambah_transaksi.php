@@ -25,24 +25,17 @@
                 </div>
                 <div class="mb-3">
                     <!-- <label for="exampleInputEmail1" class="form-label">Kode Invoice</label> -->
-                    <?php
-                    $no=rand(100,999);
-                    foreach ($transaksi->tampil_data() as $trans) {
-                        if ($trans->kode_invoice > 0) {
-                            $no=rand(100,999);
-                        }
-                    }
-                    ?>
                                     <label for="exampleInputEmail1" class="form-label">Kode Invoice</label>
-                     <input type="text" class="form-control" name="invoice" value="TR<?php echo $no++ ?>" readonly>
+                     <input type="text" class="form-control" name="invoice" value="<?php echo $transaksi->invoice(); ?>" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tanggal</label> 
                     <input type="text" class="form-control" name="tgl" value="<?php echo date("Y-m-d"); ?>" readonly>
                 </div>
                 <div class="mb-3">
-                    <select name="id_member" id="" class="form-select">
-                    <option>Pilihan Pelanggan</option>
+                <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
+                    <select name="id_member" id="" class="form-select" required>
+                    <option value="">Pilihan</option>
                     <?php foreach ($perintah2->getmember() as $deba) { ?>
                         <option value="<?php echo $deba->id ?>"><?= $deba->nama ?></option>
                         <?php } ?>
@@ -57,21 +50,23 @@
                         <input type="text" class="form-control" name="id_user" value="<?php echo $_SESSION['id']?>" hidden>
                 </div>
                 <div class="mb-3">
-                <!-- <label for="exampleInputEmail1" class="form-label"></label> -->
-                    <select name="id_produk" id="" class="form-select">
-                    <option>Pilihan Produk</option>
-                    <?php foreach ($perintah2->getproduk() as $masbro) { ?>
+                <label for="exampleInputEmail1" class="form-label">Produk / Paket</label>
+                    <select name="id_produk" id="" class="form-select" required>
+                    <option value="">Pilihan</option>
+                    <?php foreach ($perintah2->getproduk() as $masbro) {
+                        if ($_SESSION['outlet'] == $masbro->id_outlet) {
+                        ?>
                         <option value="<?php echo $masbro->id ?>"><?= $masbro->nama_paket ?></option>
-                        <?php } ?>
+                        <?php }} ?>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Quantity / KG</label> <input type="text"
-                        class="form-control" name="qty">
+                    <label for="exampleInputEmail1" class="form-label">Quantity / KG</label> <input type="number"
+                        class="form-control" name="qty" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Batas Waktu / Tgl Diambil</label> <input type="date"
-                        class="form-control" name="batass">
+                        class="form-control" name="batass" required>
                 </div>
                 <!-- <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tanggal Bayar</label> <input type="date"
@@ -102,21 +97,36 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Keterangan</label> <input type="text"
-                        class="form-control" name="keterangan">
+                        class="form-control" name="keterangan" required>
                 </div>
-                <button style="" type="submit" class="btn btn-primary">Kirim</button>
+                <button style="" name="tambah2" type="submit" class="btn btn-primary">Kirim</button>
             </form>
         </div>
         <div class="col" style="background-color: white;">
         </div>
     </div>
 </body>
-<script src="../../assets/js/bootstrap.bundle.min.js"
+<!-- <script src="../../assets/js/bootstrap.bundle.min.js"
     integrity="sha384-u10knCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTP00mMi466C8"
-    crossorigin="anonymous"></script>
-    <script src="../assets/js/bundle.js?ver=3.1.2"></script>
-    <script src="../assets/js/scripts.js?ver=3.1.2"></script>
+    crossorigin="anonymous"></script> -->
+    <?php 
+    if ($_GET['aksi'] == 'error') {
+        echo "
+        <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data Gagal diubah',
+            confirmButtonText: 'Coba lagi!'
+          })
+        </script>
+        ";
+    }
+    ?>
+    <script src="../../assets/js/mainn.js"></script>
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
 </html>

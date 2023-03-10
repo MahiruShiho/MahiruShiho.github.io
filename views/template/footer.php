@@ -11,3 +11,12 @@
         </div>
         <!-- main @e -->
     </div>
+    <!-- app-root @e -->
+    <!-- select region modal -->
+    <!-- JavaScript -->
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
+    <script src="../../assets/js/alert.js"></script>
+</body>
+
+</html>

@@ -26,20 +26,29 @@ class c_pelanggan{
 
         $conn = $this->koneksi();
 
+        // if (empty($nama) or empty($alamat) or $jeniskel === "" or empty($tlp)) {
+        //     echo '<script>';
+        //     echo 'alert("Data Gagal ditambahkan-");';
+        //     echo 'document.location.href="../views/transaksi/v_registrasi_pelanggan.php"';
+        //     echo '</script>';
+        // } else {
+
         $query = "INSERT INTO tb_member VALUES ('$id', '$nama', '$alamat', '$jeniskel', '$tlp')";
         
         $insert = mysqli_query($conn, $query);
 
         if ($insert){
-            echo '<script>';
-            echo 'alert("Data Berhasil ditambahkan");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_registrasi_pelanggan.php?aksi=tambah");
+            // echo '<script>';
+            // echo 'alert("Data Berhasil ditambahkan");';
+            // echo 'document.location.href="../views/transaksi/v_registrasi_pelanggan.php"';
+            // echo '</script>';
         }else{
-            echo '<script>';
-            echo 'alert("Data Gagal ditambahkan");';
-            echo 'document.location.href="../views/transaksi/v_transaksi.php"';
-            echo '</script>';
+            header("location:../views/transaksi/v_registrasi_pelanggan.php?aksi=error");
+            // echo '<script>';
+            // echo 'alert("Data Gagal ditambahkan");';
+            // echo 'document.location.href="../views/transaksi/v_registrasi_pelanggan.php"';
+            // echo '</script>';
             }
         
     }

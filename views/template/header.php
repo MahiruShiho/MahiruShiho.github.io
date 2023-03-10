@@ -13,10 +13,12 @@ include_once '../../validasi.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
     <!-- Page Title  -->
-    <title>Broken Laundry | BlackCrops</title>
+    <title>Seven Laundry</title>
     <!-- StyleSheets  -->
+        <!-- Alert -->
+    <script src="../../assets/js/alert.js"></script>
     <link rel="stylesheet" href="../../assets/css/dashlite.css?ver=3.1.2">
     <link id="skin-default" rel="stylesheet" href="../../assets/css/theme.css?ver=3.1.2">
         <!-- Font Icon -->
@@ -33,8 +35,8 @@ include_once '../../validasi.php';
                 <div class="nk-sidebar-element nk-sidebar-head">
                     <div class="nk-sidebar-brand">
                         <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                            <img class="logo-light logo-img" src="../../assets/images/logo.png" srcset="../../assets/images/logo2x.png 2x" alt="logo">
-                            <img class="logo-dark logo-img" src="../../assets/images/logo-dark.png" srcset="../../assets/images/logo-dark2x.png 2x" alt="logo-dark">
+                            <img class="logo-light logo-img" src="../../assets/images/broken.png" srcset="../../assets/images/broken.png 2x" alt="logo">
+                            <img class="logo-dark logo-img" src="../../assets/images/broken.png" srcset="../../assets/images/broken.png 2x" alt="logo-dark">
                             <img class="logo-small logo-img logo-img-small" src="../../assets/images/logo-small.png" srcset="../../assets/images/logo-small2x.png 2x" alt="logo-small">
                         </a>
                     </div>

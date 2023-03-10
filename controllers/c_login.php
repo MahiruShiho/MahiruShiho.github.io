@@ -5,48 +5,36 @@ session_start();
     $conn = mysqli_connect("localhost", "root", "", "laundry");
 
     //function daftar
-    if(isset($_POST['register'])) {
+//     if(isset($_POST['register'])) {
 
-        
-     if(empty($_POST["nama"]) || empty($_POST["username"]) || empty($_POST["password"])) { 
-          echo '<script>alert("Kolom Register tidak boleh kosong")</script>';
-     } else {
+//      $id = $_POST['id'];
+//      $nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
+//      $username = $_POST['username'];
+//      $password = $_POST['password'];
+//      $id_outlet = $_POST['id_outlet'];
+//      $role = $_POST['role'];
 
-     $id = $_POST['id'];
-     $nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
-     $username = $_POST['username'];
-     $password = $_POST['password'];
-     $id_outlet = $_POST['id_outlet'];
-     $role = $_POST['role'];
+//      $pass = password_hash($password, PASSWORD_DEFAULT);
 
-     $pass = password_hash($password, PASSWORD_DEFAULT);
+//      $query = "INSERT INTO tb_user values ('$id', '$nama', '$username', '$pass', '', '$role')";
 
-     $query = "INSERT INTO tb_user values ('$id', '$nama', '$username', '$pass', '', '$role')";
+//      $insert = mysqli_query($conn, $query);
 
-     $insert = mysqli_query($conn, $query);
-
-     if($insert){
-         echo '<script>';
-         echo 'alert("Registrasi Berhasil");';
-        //  echo 'document.location.href="index.php"';
-         echo '</script>';
-     } else {
-         echo '<script language="javascript">';
-         echo 'alert("Register Gagal asupkeun Data nu bener cuk");';
-        //  echo 'window.location = "index.php";';
-         echo '</script>';
-     }
- }
-}
+//      if($insert){
+//          echo '<script>';
+//          echo 'alert("Registrasi Berhasil");';
+//         //  echo 'document.location.href="index.php"';
+//          echo '</script>';
+//      } else {
+//          echo '<script language="javascript">';
+//          echo 'alert("Register Gagal asupkeun Data nu bener cuk");';
+//         //  echo 'window.location = "index.php";';
+//          echo '</script>';
+//      }
+// }
 
 if(isset($_POST['login'])) {
 
-  if(empty($_POST["username"]) || empty($_POST["password"]))  
-  {  
-       echo '<script>alert("Kolom Login tidak boleh kosong")</script>';  
-  }  
-  else  
-  { 
      $username = $_POST['username'];
      $password = $_POST['password'];
      $sql = mysqli_query($conn, "SELECT * FROM tb_user WHERE username='$username'");
@@ -62,19 +50,19 @@ if(isset($_POST['login'])) {
             $_SESSION['outlet'] = $data->id_outlet;
             $_SESSION['role'] = $data->role;
 
-            if($data->role == 'kasir') {
-                echo '<script>alert("Selamat Datang Pengguna");document.location.href="views/pengguna/home.php</script>';  
-            } else if ($data->role == 'admin') {
-                echo '<script>alert("Selamat Datang Admin");document.location.href="views/pengguna/home.php"</script>';
-            } else if ($data->role == 'owner') {
-                echo '<script>alert("Selamat Datang Admin");document.location.href="views/pengguna/home.php"</script>';
+            if($_SESSION['role'] == 'kasir') {
+                echo '<script>document.location.href="views/pengguna/home.php";</script>';  
+            } else if ($_SESSION['role'] == 'admin') {
+                echo '<script>document.location.href="views/pengguna/home.php";</script>';
+            } else if ($_SESSION['role'] == 'owner') {
+                echo '<script>document.location.href="views/pengguna/home.php";</script>';
             }
-         } 
-        }
-        else {
-            echo '<script>alert("Nama Pengguna atau Password Salah")</script>';  
+         } else {
+            header("location:login.php?aksi=error"); 
          }
-    }
+        }else {
+            header("location:login.php?aksi=error"); 
+         }
 
 }
 

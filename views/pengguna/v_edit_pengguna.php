@@ -22,19 +22,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label> <input type="text"
-                        class="form-control" name="nama" value="<?php echo $data->nama ?>">
+                        class="form-control" name="nama" value="<?php echo $data->nama ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label> <input type="text"
-                        class="form-control" name="username" value="<?php echo $data->username ?>">
+                        class="form-control" name="username" value="<?php echo $data->username ?>" required>
                 </div>
                 <div class="mb-3">
-                    <!-- <label for="exampleInputEmail1" class="form-label">Password</label>  --><input type="password"
-                        class="form-control" name="password" value="<?php echo $data->password ?>" hidden>
+                    <label for="exampleInputEmail1" class="form-label">Password</label> <input type="password"
+                        class="form-control" name="password" value="" required>
                 </div>
                 <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Outlet</label>
-                    <select name="id_outlet" id="jeniskelamin" class="form-select">
+                    <select name="id_outlet" id="jeniskelamin" class="form-select" required>
                     <?php foreach ($perintah2->getoutlet() as $data2) { ?>
                         <?php if ($data->id_outlet == $data2->id) {
                             $select = "selected";
@@ -47,15 +47,31 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"></label>
-                <select name="role" id="jeniskelamin" class="form-select">
-                    <option>Role</option>
-                    <option value="admin">Administrator</option>
+                <label for="exampleInputEmail1" class="form-label">Roles</label>
+                <select name="role" id="jeniskelamin" class="form-select" required>
+                <?php if ($data->role == "admin") {
+                    echo '
+                    <option selected value="admin">Administrator</option>
                     <option value="kasir">Kasir</option>
-                    <option value="owner">Owner</option>
+                    <option value="owner">Owner</option>';
+                         } elseif ($data->role == "kasir") {
+                            echo '
+                            <option value="admin">Administrator</option>
+                            <option selected value="kasir">Kasir</option>
+                            <option value="owner">Owner</option>';
+                         } elseif ($data->role == "owner") {
+                            echo '
+                            <option value="admin">Administrator</option>
+                            <option value="kasir">Kasir</option>
+                            <option selected value="owner">Owner</option>';
+                         } ?>
+                    <!-- <option value="">Role</option> -->
+                    <!-- <option value="admin">Administrator</option>
+                    <option value="kasir">Kasir</option>
+                    <option value="owner">Owner</option> -->
                     </select>
                 </div>
-                <button style="" type="submit" class="btn btn-primary">Kirim</button>
+                <button style="" name="update" type="submit" class="btn btn-primary">Kirim</button>
                 <?php } ?>
             </form>
         </div>
@@ -63,12 +79,27 @@
         </div>
     </div>
 </body>
-<script src="../../assets/js/bootstrap.bundle.min.js"
+<!-- <script src="../../assets/js/bootstrap.bundle.min.js"
     integrity="sha384-u10knCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTP00mMi466C8"
-    crossorigin="anonymous"></script>
-    <script src="../assets/js/bundle.js?ver=3.1.2"></script>
-    <script src="../assets/js/scripts.js?ver=3.1.2"></script>
+    crossorigin="anonymous"></script> -->
+    <?php 
+    if ($_GET['aksi'] == 'error') {
+        echo "
+        <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data Gagal diubah',
+            confirmButtonText: 'Coba lagi!'
+          })
+        </script>
+        ";
+    }
+    ?>
+    <script src="../../assets/js/mainn.js"></script>
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
 </html>

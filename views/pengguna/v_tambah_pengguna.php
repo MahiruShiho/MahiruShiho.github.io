@@ -19,47 +19,74 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label> <input type="text"
-                        class="form-control" name="nama">
+                        class="form-control" name="nama" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label> <input type="text"
-                        class="form-control" name="username">
+                        class="form-control" name="username" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Password</label> <input type="password"
-                        class="form-control" name="password">
+                        class="form-control" name="password" required>
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"></label>
-                    <select name="id_outlet" id="" class="form-select">
-                    <option>Outlet</option>
+                <label for="exampleInputEmail1" class="form-label">Outlet</label>
+                    <select name="id_outlet" id="" class="form-select" required>
+                    <option value="">Pilihan</option>
                     <?php foreach ($perintah->getoutlet() as $data) { ?>
                         <option value="<?php echo $data->id ?>"><?= $data->nama ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"></label>
-                <select name="role" id="jeniskelamin" class="form-select">
-                    <option>Role</option>
+                <label for="exampleInputEmail1" class="form-label">Roles</label>
+                <select name="role" id="jeniskelamin" class="form-select" required>
+                    <option value="">Pilihan</option>
                     <option value="admin">Administrator</option>
                     <option value="kasir">Kasir</option>
                     <option value="owner">Owner</option>
                     </select>
                 </div>
-                <button style="" type="submit" class="btn btn-primary">Kirim</button>
+                <button style="" name="tambah" type="submit" class="btn btn-primary">Kirim</button>
             </form>
         </div>
         <div class="col" style="background-color: white;">
         </div>
     </div>
 </body>
-<script src="../../assets/js/bootstrap.bundle.min.js"
+<!-- <script src="../../assets/js/bootstrap.bundle.min.js"
     integrity="sha384-u10knCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTP00mMi466C8"
-    crossorigin="anonymous"></script>
-    <script src="../assets/js/bundle.js?ver=3.1.2"></script>
-    <script src="../assets/js/scripts.js?ver=3.1.2"></script>
+    crossorigin="anonymous"></script> -->
+    <?php 
+    if ($_GET['aksi'] == 'error') {
+        echo "
+        <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data Gagal ditambahkan',
+            confirmButtonText: 'Coba lagi!'
+          })
+        </script>
+        ";
+    }   
+    elseif ($_GET['aksi'] == 'error-r') {
+        echo "
+        <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Username tidak boleh sama',
+            confirmButtonText: 'Coba lagi!'
+          })
+        </script>
+        ";
+    }
+    ?>
+    <script src="../../assets/js/mainn.js"></script>
+    <script src="../../assets/js/bundle.js?ver=3.1.2"></script>
+    <script src="../../assets/js/scripts.js?ver=3.1.2"></script>
 </body>
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
 </html>
